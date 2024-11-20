@@ -12,6 +12,30 @@
 #include <unordered_map>
 #include <utility>
 
+// Enumeration of possible states for an ARP entry
+enum class ARPState {
+  REACHABLE,  // ARP entry is valid and the MAC address is currently usable
+  INCOMPLETE, // ARP request has been sent but the corresponding MAC address has not yet been resolved
+  STALE,      // ARP entry was used previously but has not been confirmed recently
+  PERMANENT   // ARP entry will not be aged out (manually added static entry)
+};
+// Note that we never use the STALE or PERMANENT states for the assignment implementation, but 
+// it is included for completeness and extendability.
+
+
+// Structure to store an ARP entry in the ARP table
+struct ARPEntry {
+  EthernetAddress mac_address; // MAC address
+  ARPState state;              // Status of the entry
+  int ttl;                     // Time to live in milliseconds
+};
+
+
+// Type declarations for the ready queue, ARP waiting queue, and ARP table:
+using ReadyQueue = std::queue<EthernetFrame>;
+using ARPQueue = std::unordered_map<uint32_t, std::queue<InternetDatagram>>;
+using ARPTable = std::unordered_map<uint32_t, ARPEntry>;
+
 
 // A "network interface" that connects IP (the internet layer, or network layer)
 // with Ethernet (the network access layer, or link layer).
@@ -43,6 +67,15 @@ private:
   // IP (known as Internet-layer or network-layer) address of the interface
   Address ip_address_;
 
+  // Ready-to-be-sent queue, stored as a queue of Ethernet frames
+  ReadyQueue ready_queue_;
+
+  // Queue of Ethernet frames awaiting transmission once the MAC address is resolved
+  // Stored as a mapping from IP address to a queue of IPv4 datagrams
+  ARPQueue arp_queue_;
+
+  // Mapping from IP address to corresponding ethernet address
+  ARPTable arp_table_;
 
 public:
   // Construct a network interface with given Ethernet (network-access-layer) and IP (internet-layer)

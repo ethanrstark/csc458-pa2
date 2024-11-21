@@ -5,6 +5,13 @@
 #include <optional>
 #include <queue>
 
+struct RoutingTableEntry {
+  uint32_t prefix_addr; // The prefix IP address of the rule
+  uint8_t prefix_len;   // Number of significant bits in the prefix
+  std::optional<uint32_t> next_hop_addr; // Optional next hop IP address
+  size_t interface_num; // Outgoing interface number
+};
+
 // A wrapper for NetworkInterface that makes the host-side
 // interface asynchronous: instead of returning received datagrams
 // immediately (from the `recv_frame` method), it stores them for
@@ -54,6 +61,10 @@ class Router
 {
   // The router's collection of network interfaces
   std::vector<AsyncNetworkInterface> interfaces_ {};
+
+private:
+  // The router's routing table
+  std::vector<RoutingTableEntry> routing_table_;
 
 public:
   // Add an interface to the router

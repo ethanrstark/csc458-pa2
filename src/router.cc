@@ -2,9 +2,10 @@
 
 #include <iostream>
 #include <limits>
+#include <algorithm>
 
 using namespace std;
-
+    
 // route_prefix: The "up-to-32-bit" IPv4 address prefix to match the datagram's destination address against
 // prefix_length: For this route to be applicable, how many high-order (most-significant) bits of
 //    the route_prefix will need to match the corresponding bits of the datagram's destination address?
@@ -22,22 +23,36 @@ void Router::add_route(const uint32_t route_prefix,
               << (next_hop.has_value() ? next_hop->ip() : "(direct)")
               << " on interface " << interface_num << "\n";
 
-    // Validate prefix length
+    // Validate the prefix length
     if (prefix_length > 32) {
-        throw std::invalid_argument("Invalid prefix length");
+        return;
     }
 
-    // Add route to the routing table
-    routing_table_.emplace_back(RoutingTableEntry{
+    // Validate next hop
+    if (next_hop.has_value()) {
+        uint32_t mask = (prefix_length == 0) ? 0 : (~0U << (32 - prefix_length));
+        if ((route_prefix & mask) != (next_hop->ipv4_numeric() & mask)) {
+            // Next hop does not belong to the specified prefix
+            return;
+        }
+    }
+
+    RoutingTableEntry new_route = {
         route_prefix,
         prefix_length,
         next_hop ? std::optional(next_hop->ipv4_numeric()) : std::nullopt,
         interface_num
-    });
+    };
 
-    // TODO: Ensure that duplicate routes are not added to the routing table.
+    // Check for duplicate routes
+    if (std::find(routing_table_.begin(), routing_table_.end(), new_route) != routing_table_.end()) {
+        return;
+    }
+
+    // Add route to the routing table
+    routing_table_.push_back(new_route);
+
     // TODO: Handle edge case where multiple routes have a prefix length of 0 (failsafe option).
-    // TODO: Optionally validate that the next_hop falls within the network address prefix.
 }
 
 void Router::route() {

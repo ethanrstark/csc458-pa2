@@ -1,0 +1,221 @@
+Test project /home/cs144/csc458-pa2/csc458-pa2/build
+    Start  1: compile with bug-checkers
+1/7 Test  #1: compile with bug-checkers ........   Passed    0.15 sec
+    Start  8: router_2hosts_1
+2/7 Test  #8: router_2hosts_1 ..................***Failed    0.00 sec
+[32;1mConstructing network.[m
+DEBUG: Network interface has Ethernet address 02:00:00:10:a0:33 and IP address 171.67.76.46
+DEBUG: Network interface has Ethernet address 02:00:00:3e:04:4f and IP address 10.0.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:b9:c1:93 and IP address 172.16.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:2d:27:db and IP address 192.168.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:69:10:0a and IP address 198.178.229.1
+DEBUG: Network interface has Ethernet address 02:00:00:c2:83:79 and IP address 143.195.0.2
+DEBUG: Network interface has Ethernet address 02:00:00:30:ca:16 and IP address 128.30.76.255
+DEBUG: Network interface has Ethernet address de:60:50:6e:11:b0 and IP address 10.0.0.2
+DEBUG: Network interface has Ethernet address 06:93:a5:d5:7f:98 and IP address 171.67.76.1
+DEBUG: Network interface has Ethernet address 6e:32:7c:73:5d:de and IP address 192.168.0.2
+DEBUG: Network interface has Ethernet address 92:e5:39:33:e9:c1 and IP address 143.195.0.1
+DEBUG: Network interface has Ethernet address de:4b:58:76:44:66 and IP address 198.178.229.42
+DEBUG: Network interface has Ethernet address 92:e8:a1:74:e3:45 and IP address 198.178.229.43
+DEBUG: adding route 0.0.0.0/0 => 171.67.76.1 on interface 0
+DEBUG: adding route 10.0.0.0/8 => (direct) on interface 1
+DEBUG: adding route 172.16.0.0/16 => (direct) on interface 2
+DEBUG: adding route 192.168.0.0/24 => (direct) on interface 3
+DEBUG: adding route 198.178.229.0/24 => (direct) on interface 4
+DEBUG: adding route 143.195.0.0/17 => 143.195.0.1 on interface 5
+DEBUG: adding route 143.195.128.0/18 => 143.195.0.1 on interface 5
+DEBUG: adding route 143.195.192.0/19 => 143.195.0.1 on interface 5
+DEBUG: adding route 128.30.76.255/16 => 128.30.0.1 on interface 6
+[32;1m
+
+Testing traffic between two ordinary hosts (applesauce to cherrypie)...[m
+
+Host applesauce trying to send datagram (with next hop = 10.0.0.1): IPv4, len=2f, protocol=6, src=10.0.0.2, dst=192.168.0.2 payload="random payload: {125892339}"
+Transferring frame from applesauce to router.eth0: dst=ff:ff:ff:ff:ff:ff, src=de:60:50:6e:11:b0, type=ARP, payload: ARP: opcode=REQUEST, sender=de:60:50:6e:11:b0/10.0.0.2, target=00:00:00:00:00:00/10.0.0.1
+Transferring frame from router.eth0 to applesauce: dst=de:60:50:6e:11:b0, src=02:00:00:3e:04:4f, type=ARP, payload: ARP: opcode=REPLY, sender=02:00:00:3e:04:4f/10.0.0.1, target=de:60:50:6e:11:b0/10.0.0.2
+Transferring frame from applesauce to router.eth0: dst=02:00:00:3e:04:4f, src=de:60:50:6e:11:b0, type=IPv4, payload: IPv4: IPv4, len=2f, protocol=6, src=10.0.0.2, dst=192.168.0.2 payload="random payload: {125892339}"
+Transferring frame from router.eth2 to cherrypie: dst=ff:ff:ff:ff:ff:ff, src=02:00:00:2d:27:db, type=ARP, payload: ARP: opcode=REQUEST, sender=02:00:00:2d:27:db/192.168.0.1, target=00:00:00:00:00:00/192.168.0.2
+Transferring frame from cherrypie to router.eth2: dst=02:00:00:2d:27:db, src=6e:32:7c:73:5d:de, type=ARP, payload: ARP: opcode=REPLY, sender=6e:32:7c:73:5d:de/192.168.0.2, target=02:00:00:2d:27:db/192.168.0.1
+Transferring frame from router.eth2 to cherrypie: dst=6e:32:7c:73:5d:de, src=02:00:00:2d:27:db, type=IPv4, payload: bad IPv4 datagram
+
+
+
+[31;1mError: Host cherrypie did NOT receive an expected Internet datagram: IPv4, len=2f, protocol=6, src=10.0.0.2, dst=192.168.0.2[m
+
+    Start  9: router_2hosts_2
+3/7 Test  #9: router_2hosts_2 ..................***Failed    0.00 sec
+[32;1mConstructing network.[m
+DEBUG: Network interface has Ethernet address 02:00:00:54:51:63 and IP address 171.67.76.46
+DEBUG: Network interface has Ethernet address 02:00:00:54:b7:37 and IP address 10.0.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:4d:47:0d and IP address 172.16.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:82:c1:4b and IP address 192.168.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:1a:11:af and IP address 198.178.229.1
+DEBUG: Network interface has Ethernet address 02:00:00:26:9f:d6 and IP address 143.195.0.2
+DEBUG: Network interface has Ethernet address 02:00:00:f8:e7:2f and IP address 128.30.76.255
+DEBUG: Network interface has Ethernet address 16:b1:14:9a:39:dc and IP address 10.0.0.2
+DEBUG: Network interface has Ethernet address e6:af:e2:76:aa:48 and IP address 171.67.76.1
+DEBUG: Network interface has Ethernet address 9e:ca:47:93:68:a8 and IP address 192.168.0.2
+DEBUG: Network interface has Ethernet address 6e:62:35:fd:bf:9f and IP address 143.195.0.1
+DEBUG: Network interface has Ethernet address 22:0c:24:b7:8e:e4 and IP address 198.178.229.42
+DEBUG: Network interface has Ethernet address 8a:af:35:76:33:34 and IP address 198.178.229.43
+DEBUG: adding route 0.0.0.0/0 => 171.67.76.1 on interface 0
+DEBUG: adding route 10.0.0.0/8 => (direct) on interface 1
+DEBUG: adding route 172.16.0.0/16 => (direct) on interface 2
+DEBUG: adding route 192.168.0.0/24 => (direct) on interface 3
+DEBUG: adding route 198.178.229.0/24 => (direct) on interface 4
+DEBUG: adding route 143.195.0.0/17 => 143.195.0.1 on interface 5
+DEBUG: adding route 143.195.128.0/18 => 143.195.0.1 on interface 5
+DEBUG: adding route 143.195.192.0/19 => 143.195.0.1 on interface 5
+DEBUG: adding route 128.30.76.255/16 => 128.30.0.1 on interface 6
+[32;1m
+
+Testing traffic between two ordinary hosts (cherrypie to applesauce)...[m
+
+Host cherrypie trying to send datagram (with next hop = 192.168.0.1): IPv4, len=30, protocol=6, src=192.168.0.2, dst=10.0.0.2 payload="random payload: {3663851717}"
+Transferring frame from cherrypie to router.eth2: dst=ff:ff:ff:ff:ff:ff, src=9e:ca:47:93:68:a8, type=ARP, payload: ARP: opcode=REQUEST, sender=9e:ca:47:93:68:a8/192.168.0.2, target=00:00:00:00:00:00/192.168.0.1
+Transferring frame from router.eth2 to cherrypie: dst=9e:ca:47:93:68:a8, src=02:00:00:82:c1:4b, type=ARP, payload: ARP: opcode=REPLY, sender=02:00:00:82:c1:4b/192.168.0.1, target=9e:ca:47:93:68:a8/192.168.0.2
+Transferring frame from cherrypie to router.eth2: dst=02:00:00:82:c1:4b, src=9e:ca:47:93:68:a8, type=IPv4, payload: IPv4: IPv4, len=30, protocol=6, src=192.168.0.2, dst=10.0.0.2 payload="random payload: {3663851717}"
+Transferring frame from router.eth0 to applesauce: dst=ff:ff:ff:ff:ff:ff, src=02:00:00:54:b7:37, type=ARP, payload: ARP: opcode=REQUEST, sender=02:00:00:54:b7:37/10.0.0.1, target=00:00:00:00:00:00/10.0.0.2
+Transferring frame from applesauce to router.eth0: dst=02:00:00:54:b7:37, src=16:b1:14:9a:39:dc, type=ARP, payload: ARP: opcode=REPLY, sender=16:b1:14:9a:39:dc/10.0.0.2, target=02:00:00:54:b7:37/10.0.0.1
+Transferring frame from router.eth0 to applesauce: dst=16:b1:14:9a:39:dc, src=02:00:00:54:b7:37, type=IPv4, payload: bad IPv4 datagram
+
+
+
+[31;1mError: Host applesauce did NOT receive an expected Internet datagram: IPv4, len=30, protocol=6, src=192.168.0.2, dst=10.0.0.2[m
+
+    Start 10: router_internet
+4/7 Test #10: router_internet ..................***Failed    0.00 sec
+[32;1mConstructing network.[m
+DEBUG: Network interface has Ethernet address 02:00:00:a4:f4:58 and IP address 171.67.76.46
+DEBUG: Network interface has Ethernet address 02:00:00:6f:34:5e and IP address 10.0.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:9d:1b:df and IP address 172.16.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:1b:52:8b and IP address 192.168.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:30:29:d2 and IP address 198.178.229.1
+DEBUG: Network interface has Ethernet address 02:00:00:9b:1e:a7 and IP address 143.195.0.2
+DEBUG: Network interface has Ethernet address 02:00:00:88:78:7c and IP address 128.30.76.255
+DEBUG: Network interface has Ethernet address 22:9c:7f:16:9c:f9 and IP address 10.0.0.2
+DEBUG: Network interface has Ethernet address 2a:32:cd:2e:a1:83 and IP address 171.67.76.1
+DEBUG: Network interface has Ethernet address 4e:37:5c:fa:97:9f and IP address 192.168.0.2
+DEBUG: Network interface has Ethernet address 4a:67:41:d9:d3:03 and IP address 143.195.0.1
+DEBUG: Network interface has Ethernet address ae:c8:98:5c:ab:60 and IP address 198.178.229.42
+DEBUG: Network interface has Ethernet address 02:c5:cb:de:84:09 and IP address 198.178.229.43
+DEBUG: adding route 0.0.0.0/0 => 171.67.76.1 on interface 0
+DEBUG: adding route 10.0.0.0/8 => (direct) on interface 1
+DEBUG: adding route 172.16.0.0/16 => (direct) on interface 2
+DEBUG: adding route 192.168.0.0/24 => (direct) on interface 3
+DEBUG: adding route 198.178.229.0/24 => (direct) on interface 4
+DEBUG: adding route 143.195.0.0/17 => 143.195.0.1 on interface 5
+DEBUG: adding route 143.195.128.0/18 => 143.195.0.1 on interface 5
+DEBUG: adding route 143.195.192.0/19 => 143.195.0.1 on interface 5
+DEBUG: adding route 128.30.76.255/16 => 128.30.0.1 on interface 6
+[32;1m
+
+Testing applesauce sending to the Internet.[m
+
+Host applesauce trying to send datagram (with next hop = 10.0.0.1): IPv4, len=30, protocol=6, src=10.0.0.2, dst=1.2.3.4 payload="random payload: {2112379771}"
+Transferring frame from applesauce to router.eth0: dst=ff:ff:ff:ff:ff:ff, src=22:9c:7f:16:9c:f9, type=ARP, payload: ARP: opcode=REQUEST, sender=22:9c:7f:16:9c:f9/10.0.0.2, target=00:00:00:00:00:00/10.0.0.1
+Transferring frame from router.eth0 to applesauce: dst=22:9c:7f:16:9c:f9, src=02:00:00:6f:34:5e, type=ARP, payload: ARP: opcode=REPLY, sender=02:00:00:6f:34:5e/10.0.0.1, target=22:9c:7f:16:9c:f9/10.0.0.2
+Transferring frame from applesauce to router.eth0: dst=02:00:00:6f:34:5e, src=22:9c:7f:16:9c:f9, type=IPv4, payload: IPv4: IPv4, len=30, protocol=6, src=10.0.0.2, dst=1.2.3.4 payload="random payload: {2112379771}"
+Transferring frame from router.default to default_router: dst=ff:ff:ff:ff:ff:ff, src=02:00:00:a4:f4:58, type=ARP, payload: ARP: opcode=REQUEST, sender=02:00:00:a4:f4:58/171.67.76.46, target=00:00:00:00:00:00/171.67.76.1
+Transferring frame from default_router to router.default: dst=02:00:00:a4:f4:58, src=2a:32:cd:2e:a1:83, type=ARP, payload: ARP: opcode=REPLY, sender=2a:32:cd:2e:a1:83/171.67.76.1, target=02:00:00:a4:f4:58/171.67.76.46
+Transferring frame from router.default to default_router: dst=2a:32:cd:2e:a1:83, src=02:00:00:a4:f4:58, type=IPv4, payload: bad IPv4 datagram
+
+
+
+[31;1mError: Host default_router did NOT receive an expected Internet datagram: IPv4, len=30, protocol=6, src=10.0.0.2, dst=1.2.3.4[m
+
+    Start 11: router_hs_network
+5/7 Test #11: router_hs_network ................***Failed    0.00 sec
+[32;1mConstructing network.[m
+DEBUG: Network interface has Ethernet address 02:00:00:e2:95:8c and IP address 171.67.76.46
+DEBUG: Network interface has Ethernet address 02:00:00:0c:6d:53 and IP address 10.0.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:30:14:bd and IP address 172.16.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:fc:16:ef and IP address 192.168.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:e7:b2:08 and IP address 198.178.229.1
+DEBUG: Network interface has Ethernet address 02:00:00:bf:2a:16 and IP address 143.195.0.2
+DEBUG: Network interface has Ethernet address 02:00:00:21:16:5d and IP address 128.30.76.255
+DEBUG: Network interface has Ethernet address 9a:d0:6c:d4:a1:1f and IP address 10.0.0.2
+DEBUG: Network interface has Ethernet address 7e:b2:36:4f:bb:38 and IP address 171.67.76.1
+DEBUG: Network interface has Ethernet address 4e:d2:c8:82:2d:1a and IP address 192.168.0.2
+DEBUG: Network interface has Ethernet address 5e:da:b2:d2:f2:85 and IP address 143.195.0.1
+DEBUG: Network interface has Ethernet address 46:19:a5:e9:70:86 and IP address 198.178.229.42
+DEBUG: Network interface has Ethernet address 62:71:dc:f6:ca:2e and IP address 198.178.229.43
+DEBUG: adding route 0.0.0.0/0 => 171.67.76.1 on interface 0
+DEBUG: adding route 10.0.0.0/8 => (direct) on interface 1
+DEBUG: adding route 172.16.0.0/16 => (direct) on interface 2
+DEBUG: adding route 192.168.0.0/24 => (direct) on interface 3
+DEBUG: adding route 198.178.229.0/24 => (direct) on interface 4
+DEBUG: adding route 143.195.0.0/17 => 143.195.0.1 on interface 5
+DEBUG: adding route 143.195.128.0/18 => 143.195.0.1 on interface 5
+DEBUG: adding route 143.195.192.0/19 => 143.195.0.1 on interface 5
+DEBUG: adding route 128.30.76.255/16 => 128.30.0.1 on interface 6
+[32;1m
+
+Testing sending to the HS network and Internet.[m
+
+Host applesauce trying to send datagram (with next hop = 10.0.0.1): IPv4, len=30, protocol=6, src=10.0.0.2, dst=143.195.131.17 payload="random payload: {3173456463}"
+Transferring frame from applesauce to router.eth0: dst=ff:ff:ff:ff:ff:ff, src=9a:d0:6c:d4:a1:1f, type=ARP, payload: ARP: opcode=REQUEST, sender=9a:d0:6c:d4:a1:1f/10.0.0.2, target=00:00:00:00:00:00/10.0.0.1
+Transferring frame from router.eth0 to applesauce: dst=9a:d0:6c:d4:a1:1f, src=02:00:00:0c:6d:53, type=ARP, payload: ARP: opcode=REPLY, sender=02:00:00:0c:6d:53/10.0.0.1, target=9a:d0:6c:d4:a1:1f/10.0.0.2
+Transferring frame from applesauce to router.eth0: dst=02:00:00:0c:6d:53, src=9a:d0:6c:d4:a1:1f, type=IPv4, payload: IPv4: IPv4, len=30, protocol=6, src=10.0.0.2, dst=143.195.131.17 payload="random payload: {3173456463}"
+Transferring frame from router.hs4 to hs_router: dst=ff:ff:ff:ff:ff:ff, src=02:00:00:bf:2a:16, type=ARP, payload: ARP: opcode=REQUEST, sender=02:00:00:bf:2a:16/143.195.0.2, target=00:00:00:00:00:00/143.195.0.1
+Transferring frame from hs_router to router.hs4: dst=02:00:00:bf:2a:16, src=5e:da:b2:d2:f2:85, type=ARP, payload: ARP: opcode=REPLY, sender=5e:da:b2:d2:f2:85/143.195.0.1, target=02:00:00:bf:2a:16/143.195.0.2
+Transferring frame from router.hs4 to hs_router: dst=5e:da:b2:d2:f2:85, src=02:00:00:bf:2a:16, type=IPv4, payload: bad IPv4 datagram
+
+
+
+[31;1mError: Host hs_router did NOT receive an expected Internet datagram: IPv4, len=30, protocol=6, src=10.0.0.2, dst=143.195.131.17[m
+
+    Start 12: router_same_network
+6/7 Test #12: router_same_network ..............***Failed    0.00 sec
+[32;1mConstructing network.[m
+DEBUG: Network interface has Ethernet address 02:00:00:61:36:35 and IP address 171.67.76.46
+DEBUG: Network interface has Ethernet address 02:00:00:80:af:3a and IP address 10.0.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:99:49:b0 and IP address 172.16.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:5b:a4:6f and IP address 192.168.0.1
+DEBUG: Network interface has Ethernet address 02:00:00:36:14:f0 and IP address 198.178.229.1
+DEBUG: Network interface has Ethernet address 02:00:00:2a:84:74 and IP address 143.195.0.2
+DEBUG: Network interface has Ethernet address 02:00:00:d5:aa:e9 and IP address 128.30.76.255
+DEBUG: Network interface has Ethernet address 0a:a7:d6:f8:53:f4 and IP address 10.0.0.2
+DEBUG: Network interface has Ethernet address c6:a3:47:02:89:e9 and IP address 171.67.76.1
+DEBUG: Network interface has Ethernet address ba:2f:d1:b7:5f:a1 and IP address 192.168.0.2
+DEBUG: Network interface has Ethernet address 3a:b2:d3:a0:38:f8 and IP address 143.195.0.1
+DEBUG: Network interface has Ethernet address 1e:5e:9a:fb:64:b3 and IP address 198.178.229.42
+DEBUG: Network interface has Ethernet address 62:fa:96:21:e6:12 and IP address 198.178.229.43
+DEBUG: adding route 0.0.0.0/0 => 171.67.76.1 on interface 0
+DEBUG: adding route 10.0.0.0/8 => (direct) on interface 1
+DEBUG: adding route 172.16.0.0/16 => (direct) on interface 2
+DEBUG: adding route 192.168.0.0/24 => (direct) on interface 3
+DEBUG: adding route 198.178.229.0/24 => (direct) on interface 4
+DEBUG: adding route 143.195.0.0/17 => 143.195.0.1 on interface 5
+DEBUG: adding route 143.195.128.0/18 => 143.195.0.1 on interface 5
+DEBUG: adding route 143.195.192.0/19 => 143.195.0.1 on interface 5
+DEBUG: adding route 128.30.76.255/16 => 128.30.0.1 on interface 6
+[32;1m
+
+Testing two hosts on the same network (dm42 to dm43)...[m
+
+Host dm42 trying to send datagram (with next hop = 198.178.229.1): IPv4, len=30, protocol=6, src=198.178.229.42, dst=198.178.229.43 payload="random payload: {1396478678}"
+Transferring frame from dm42 to router.uun3 and dm43: dst=ff:ff:ff:ff:ff:ff, src=1e:5e:9a:fb:64:b3, type=ARP, payload: ARP: opcode=REQUEST, sender=1e:5e:9a:fb:64:b3/198.178.229.42, target=00:00:00:00:00:00/198.178.229.1
+Transferring frame from router.uun3 to dm42 and dm43: dst=1e:5e:9a:fb:64:b3, src=02:00:00:36:14:f0, type=ARP, payload: ARP: opcode=REPLY, sender=02:00:00:36:14:f0/198.178.229.1, target=1e:5e:9a:fb:64:b3/198.178.229.42
+Transferring frame from dm42 to router.uun3 and dm43: dst=02:00:00:36:14:f0, src=1e:5e:9a:fb:64:b3, type=IPv4, payload: IPv4: IPv4, len=30, protocol=6, src=198.178.229.42, dst=198.178.229.43 payload="random payload: {1396478678}"
+Transferring frame from router.uun3 to dm42 and dm43: dst=ff:ff:ff:ff:ff:ff, src=02:00:00:36:14:f0, type=ARP, payload: ARP: opcode=REQUEST, sender=02:00:00:36:14:f0/198.178.229.1, target=00:00:00:00:00:00/198.178.229.43
+Transferring frame from dm43 to router.uun3 and dm42: dst=02:00:00:36:14:f0, src=62:fa:96:21:e6:12, type=ARP, payload: ARP: opcode=REPLY, sender=62:fa:96:21:e6:12/198.178.229.43, target=02:00:00:36:14:f0/198.178.229.1
+Transferring frame from router.uun3 to dm42 and dm43: dst=62:fa:96:21:e6:12, src=02:00:00:36:14:f0, type=IPv4, payload: bad IPv4 datagram
+
+
+
+[31;1mError: Host dm43 did NOT receive an expected Internet datagram: IPv4, len=30, protocol=6, src=198.178.229.42, dst=198.178.229.43[m
+
+    Start 13: router_ttl
+7/7 Test #13: router_ttl .......................   Passed    0.00 sec
+
+29% tests passed, 5 tests failed out of 7
+
+Total Test time (real) =   0.17 sec
+
+The following tests FAILED:
+	  8 - router_2hosts_1 (Failed)
+	  9 - router_2hosts_2 (Failed)
+	 10 - router_internet (Failed)
+	 11 - router_hs_network (Failed)
+	 12 - router_same_network (Failed)

@@ -5,9 +5,10 @@
 #include <optional>
 #include <queue>
 
+// A routing table entry
 struct RoutingTableEntry {
-  uint32_t prefix_addr; // The prefix IP address of the rule
-  uint8_t prefix_len;   // Number of significant bits in the prefix
+  uint32_t prefix_addr; // The prefix IP address of the route
+  uint8_t prefix_len;   // Number of bits in prefix_addr to match
   std::optional<uint32_t> next_hop_addr; // Optional next hop IP address
   size_t interface_num; // Outgoing interface number
 

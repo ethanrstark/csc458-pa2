@@ -49,10 +49,16 @@ void Router::add_route(const uint32_t route_prefix,
         return;
     }
 
+    // Check for existing default route (a route with prefix length 0)
+    bool has_default_route = std::any_of(routing_table_.begin(), routing_table_.end(), [](const RoutingTableEntry& entry) {
+        return entry.prefix_len == 0;
+    });
+    if (has_default_route) {
+        return;
+    }
+
     // Add route to the routing table
     routing_table_.push_back(new_route);
-
-    // TODO: Handle edge case where multiple routes have a prefix length of 0 (failsafe option).
 }
 
 void Router::route() {

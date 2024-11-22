@@ -10,6 +10,12 @@ struct RoutingTableEntry {
   uint8_t prefix_len;   // Number of significant bits in the prefix
   std::optional<uint32_t> next_hop_addr; // Optional next hop IP address
   size_t interface_num; // Outgoing interface number
+
+  // Overload operator==
+  bool operator==(const RoutingTableEntry& other) const {
+      return prefix_addr == other.prefix_addr &&
+             prefix_len == other.prefix_len;
+  }
 };
 
 // A wrapper for NetworkInterface that makes the host-side

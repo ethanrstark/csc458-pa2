@@ -49,13 +49,18 @@ void Router::add_route(const uint32_t route_prefix,
         return;
     }
 
-    // Check for existing default route (a route with prefix length 0)
-    bool has_default_route = std::any_of(routing_table_.begin(), routing_table_.end(), [](const RoutingTableEntry& entry) {
-        return entry.prefix_len == 0;
-    });
-    if (has_default_route) {
+    // Make sure the interface number is valid
+    if (interface_num >= interfaces_.size()) {
         return;
     }
+
+    // // Check for existing default route (a route with prefix length 0)
+    // bool has_default_route = std::any_of(routing_table_.begin(), routing_table_.end(), [](const RoutingTableEntry& entry) {
+    //     return entry.prefix_len == 0;
+    // });
+    // if (has_default_route) {
+    //     return;
+    // }
 
     // Add route to the routing table
     routing_table_.push_back(new_route);
@@ -85,7 +90,11 @@ void Router::route() {
 
             if (best_match.has_value()) {
                 // Decrement TTL and forward datagram if valid
+                if (datagram->header.ttl == 0) {
+                    return;
+                }
                 datagram->header.ttl -= 1;
+                datagram->header.compute_checksum();
                 if (datagram->header.ttl > 0) {
                     AsyncNetworkInterface& interface_out = interface(best_match->interface_num);
                     Address next_hop = best_match->next_hop_addr.has_value()

@@ -64,9 +64,12 @@ class Router
 
 private:
   // The router's routing table
-  std::vector<RoutingTableEntry> routing_table_;
+  std::vector<RoutingTableEntry> routing_table_ {};
 
 public:
+  // Default constructor
+  Router() = default;
+
   // Add an interface to the router
   // interface: an already-constructed network interface
   // returns the index of the interface after it has been added to the router
